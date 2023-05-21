@@ -1,0 +1,141 @@
+@startuml
+@startuml
+set separator none
+!pragma useIntermediatePackages false
+left to right direction
+skin rose
+
+package cl.ucn.disc.pa.inventario{
+ package services{
+  interface Inventario{
+   +AgregarInstrumento(): void
+   +VenderInstrumento(): void
+   +ConsultarInventario(): void
+   +Cierre(): void
+   +DesplegarTotal(existe: boolean): Instrumento
+
+  }
+  class InventarioImpl{
+   +InventarioImpl(): Inventario
+
+  }
+  InventarioImpl .. Inventario
+ }
+ package utils{
+  class ListaInstrumento{
+   -listaInstrumento: Instrumento[]
+   +buscar(codigo: String): Instrumento
+   +agregar(codigo: String): Instrumento
+   +remover(codigo: String): Instrumento
+   +existe(stock: boolean): boolean
+  }
+
+ }
+ package model{
+  abstract Instrumento{
+   -codigo: String
+   -precio: int
+   -stock: boolean
+   -materialDeConstruccion: String
+   +Instrumento(codigo: String,precio: int, stock: boolean,materialDeConstruccion: String)
+   +getCodigo(): String
+   +getPrecio(): int
+   +getStock(): boolean
+   +getTipo(): String
+   +getMaterialDeConstruccion():
+   +setStock(codigo: String): stock
+
+  }
+  abstract Viento{
+   -instrumento: String
+   +viento(codigo: String,precio: int,stock : boolean,tipo: String,instrumento: String,materialDeConstruccion: String)
+   +getInstrumento(): String
+   +getMaterial(): String
+  }
+  abstract Percusion{
+   -instrumento: String
+   -percusion: String
+   -altura: double
+   +Percusion(codigo: String,precio: int,stock : boolean,tipo: String,instrumento: String,percusion: String,materialDeConstruccion: String,altura: double)
+   +getInstrumento(): String
+   +getPercusion(): String
+   +getAltura(): double
+
+  }
+  abstract Cuerda{
+   -instrumento: String
+   -tipoDeCuerda: String
+   -numeroCuerdas: int
+   -tipoSonido: String
+   +Cuerda(codigo: String,precio: int,stock : boolean,tipo: String,instrumento: String,tipoDeCuerda: String,numeroCuerdas: int,materialDeConstruccion: String,tipoSonido String)
+   +getInstrumento(): String
+   +getTipoDeCuerda(): String
+   +getNumeroCuerdas(): int
+
+  }
+  class CampanasTubulares{
+   +CampanasTubulares(codigo: String,precio: int,stock : boolean,tipo: String,instrumento: String,percusion: String,materialDeConstruccion: String,altura: double)
+  }
+  class Bombo{
+   +Bombo(codigo: String,precio: int,stock : boolean,tipo: String,instrumento: String,percusion: String,materialDeConstruccion: String,altura: double)
+  }
+  class Cajon{
+   +Cajon(codigo: String,precio: int,stock : boolean,tipo: String,instrumento: String,percusion: String,materialDeConstruccion: String,altura: double)
+  }
+  class Bongo{
+   +Bongo(codigo: String,precio: int,stock : boolean,tipo: String,instrumento: String,percusion: String,materialDeConstruccion: String,altura: double)
+  }
+  class Guitarra{
+   +Guitarra(codigo: String,precio: int,stock : boolean,tipo: String,instrumento: String,tipoDeCuerda: String,numeroCuerdas: int,materialConstruccion: String,tipoSonido: String)
+   +getGuardar()
+  }
+  class Violin{
+   +Violin(codigo: String,precio: int,stock : boolean,tipo: String,instrumento: String,tipoDeCuerda: String,numeroCuerdas: int,materialConstruccion: String,tipoSonido: String)
+  }
+  class Bajo{
+   +Bajo(codigo: String,precio: int,stock : boolean,tipo: String,instrumento: String,tipoDeCuerda: String,numeroCuerdas: int,materialConstruccion: String,tipoSonido: String)
+  }
+  class Arpa{
+   +Arpa(codigo: String,precio: int,stock : boolean,tipo: String,instrumento: String,tipoDeCuerda: String,numeroCuerdas: int,materialConstruccion: String,tipoSonido: String)
+  }
+  class Trompeta{
+   +Trompeta(codigo: String,precio: int,stock : boolean,tipo: String,instrumento: String,material: String)
+  }
+  class Saxofon{
+   +Saxofon(codigo: String,precio: int,stock : boolean,tipo: String,instrumento: String,material: String)
+  }
+  class Clarinete{
+   +Clarinete(codigo: String,precio: int,stock : boolean,tipo: String,instrumento: String,material: String)
+  }
+  class FlautaTraversa{
+   +FlautaTraversa(codigo: String,precio: int,stock : boolean,tipo: String,instrumento: String,material: String)
+  }
+  class Cliente{
+   -rut: String
+   -nombre: String
+   +Cliente(rut: String,nombre: String)
+   +getRut(): String
+   +getNombre(): String
+  }
+ }
+}
+Instrumento -- Cuerda: -tipo: Cuerda
+Instrumento -- Viento: -tipo: Viento
+Instrumento -- Percusion: -tipo: Percusion
+Percusion -- Bongo
+Cuerda -- Violin
+Cuerda -- Bajo
+Cuerda -- Arpa
+Cuerda -- Guitarra
+Percusion -- CampanasTubulares
+Percusion -- Bombo
+Percusion -- Cajon
+Viento -- FlautaTraversa
+Viento -- Saxofon
+Viento -- Trompeta
+Viento -- Clarinete
+ListaInstrumento -- Instrumento
+Inventario -- ListaInstrumento
+Inventario -- Cliente
+@enduml
+@enduml
